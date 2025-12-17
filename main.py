@@ -111,8 +111,15 @@ def get_config():
     config = {}
     
     print_section("Cấu Hình SMTP Server")
-    print(f"{Colors.WHITE}  Gợi ý: Gmail (smtp.gmail.com:587), Outlook (smtp.office365.com:587){Colors.RESET}")
-    print(f"{Colors.WHITE}         Custom domain thường dùng SSL port 465{Colors.RESET}")
+    print(f"{Colors.WHITE}  ┌─────────────────────────────────────────────────────────┐{Colors.RESET}")
+    print(f"{Colors.WHITE}  │ Email            │ SMTP Server            │ Port │ SSL │{Colors.RESET}")
+    print(f"{Colors.WHITE}  ├─────────────────────────────────────────────────────────┤{Colors.RESET}")
+    print(f"{Colors.WHITE}  │ Gmail            │ smtp.gmail.com         │ 587  │  n  │{Colors.RESET}")
+    print(f"{Colors.WHITE}  │ Outlook/Hotmail  │ smtp.office365.com     │ 587  │  n  │{Colors.RESET}")
+    print(f"{Colors.WHITE}  │ Yahoo            │ smtp.mail.yahoo.com    │ 587  │  n  │{Colors.RESET}")
+    print(f"{Colors.WHITE}  │ Custom (SSL)     │ mail.yourdomain.com    │ 465  │  y  │{Colors.RESET}")
+    print(f"{Colors.WHITE}  └─────────────────────────────────────────────────────────┘{Colors.RESET}")
+    print(f"{Colors.YELLOW}  💡 Port 587 → SSL: n | Port 465 → SSL: y{Colors.RESET}")
     config['smtp_server'] = input_field("SMTP Server", "smtp.gmail.com")
     config['smtp_port'] = int(input_field("SMTP Port", "587"))
     config['use_ssl'] = input_field("Dùng SSL? (y/n)", "n").lower() == 'y'
