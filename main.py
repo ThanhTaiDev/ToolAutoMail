@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import smtplib
 import time
 import random
@@ -5,6 +6,10 @@ import os
 import sys
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
+
+# Fix UTF-8 for Windows
+if sys.platform == 'win32':
+    sys.stdout.reconfigure(encoding='utf-8')
 
 # Colors
 class Colors:
@@ -50,11 +55,11 @@ def input_field(label, default=""):
     return input(f"{Colors.GREEN}  ➤ {label}: {Colors.RESET}")
 
 def input_multiline(label):
-    print(f"{Colors.GREEN}  ➤ {label} {Colors.WHITE}(nhap 'END' de ket thuc):{Colors.RESET}")
+    print(f"{Colors.GREEN}  ➤ {label} {Colors.WHITE}(nhập 'XONG' để kết thúc):{Colors.RESET}")
     lines = []
     while True:
         line = input(f"{Colors.WHITE}    | {Colors.RESET}")
-        if line.strip().upper() == 'END':
+        if line.strip().upper() == 'XONG':
             break
         lines.append(line)
     return '\n'.join(lines)
@@ -82,16 +87,16 @@ def main_menu():
     print_banner()
     print_divider()
     
-    print_section("Available Options")
+    print_section("Các Chức Năng")
     print(f"""
-{Colors.RED}  0. ✗ Exit Program{Colors.RESET}
-{Colors.GREEN}  1. ➤ Start Send Email{Colors.RESET}
-{Colors.CYAN}  2. ◉ Show Current Config{Colors.RESET}
-{Colors.YELLOW}  3. ⚙ Quick Send (use saved config){Colors.RESET}
+{Colors.RED}  0. ✗ Thoát Chương Trình{Colors.RESET}
+{Colors.GREEN}  1. ➤ Gửi Email Mới        {Colors.WHITE}(Nhập cấu hình và gửi email){Colors.RESET}
+{Colors.CYAN}  2. ◉ Xem Cấu Hình         {Colors.WHITE}(Xem cấu hình đã lưu){Colors.RESET}
+{Colors.YELLOW}  3. ⚙ Gửi Nhanh            {Colors.WHITE}(Gửi lại với cấu hình cũ){Colors.RESET}
     """)
     print_divider()
     
-    return input(f"{Colors.MAGENTA}  Select option: {Colors.RESET}")
+    return input(f"{Colors.MAGENTA}  Chọn chức năng: {Colors.RESET}")
 
 def get_config():
     clear_screen()
@@ -100,22 +105,22 @@ def get_config():
     
     config = {}
     
-    print_section("Email Configuration")
-    config['sender'] = input_field("Sender Email")
-    config['password'] = input_field("App Password")
+    print_section("Cấu Hình Email Gửi")
+    config['sender'] = input_field("Email của bạn")
+    config['password'] = input_field("App Password (16 ký tự)")
     
-    print_section("Recipients (comma separated)")
-    recipients_str = input_field("Recipients")
+    print_section("Người Nhận (cách nhau bằng dấu phẩy)")
+    recipients_str = input_field("Danh sách email nhận")
     config['recipients'] = [r.strip() for r in recipients_str.split(',')]
     
-    print_section("Send Settings")
-    config['loop_count'] = int(input_field("Loop Count", "10"))
-    config['delay_min'] = int(input_field("Delay Min (seconds)", "5"))
-    config['delay_max'] = int(input_field("Delay Max (seconds)", "10"))
+    print_section("Cài Đặt Gửi")
+    config['loop_count'] = int(input_field("Số lần gửi lặp lại", "10"))
+    config['delay_min'] = int(input_field("Thời gian chờ tối thiểu (giây)", "5"))
+    config['delay_max'] = int(input_field("Thời gian chờ tối đa (giây)", "10"))
     
-    print_section("Email Content")
-    config['subject'] = input_field("Subject Template", "Intellectual Property Appeal Contact Form")
-    config['content'] = input_multiline("Email Content")
+    print_section("Nội Dung Email")
+    config['subject'] = input_field("Tiêu đề email", "Intellectual Property Appeal Contact Form")
+    config['content'] = input_multiline("Nội dung email")
     
     return config
 
@@ -123,7 +128,7 @@ def run_send(config):
     clear_screen()
     print_banner()
     print_divider()
-    print_section("Sending Emails...")
+    print_section("Đang Gửi Email...")
     print()
     
     success = 0
@@ -139,38 +144,38 @@ def run_send(config):
                 config['content']
             )
             success += 1
-            print(f"{Colors.GREEN}  ✓ [{i}/{config['loop_count']}] Sent successfully!{Colors.RESET}")
-            print(f"{Colors.WHITE}    Subject: {subject}{Colors.RESET}")
+            print(f"{Colors.GREEN}  ✓ [{i}/{config['loop_count']}] Gửi thành công!{Colors.RESET}")
+            print(f"{Colors.WHITE}    Tiêu đề: {subject}{Colors.RESET}")
         except Exception as e:
             failed += 1
-            print(f"{Colors.RED}  ✗ [{i}/{config['loop_count']}] Failed: {e}{Colors.RESET}")
+            print(f"{Colors.RED}  ✗ [{i}/{config['loop_count']}] Thất bại: {e}{Colors.RESET}")
         
         if i < config['loop_count']:
             delay = random.randint(config['delay_min'], config['delay_max'])
-            print(f"{Colors.YELLOW}    Waiting {delay}s...{Colors.RESET}\n")
+            print(f"{Colors.YELLOW}    Chờ {delay} giây...{Colors.RESET}\n")
             time.sleep(delay)
     
     print_divider()
-    print(f"\n{Colors.GREEN}  ✓ Complete! Success: {success} | Failed: {failed}{Colors.RESET}")
-    input(f"\n{Colors.CYAN}  Press Enter to continue...{Colors.RESET}")
+    print(f"\n{Colors.GREEN}  ✓ Hoàn thành! Thành công: {success} | Thất bại: {failed}{Colors.RESET}")
+    input(f"\n{Colors.CYAN}  Nhấn Enter để tiếp tục...{Colors.RESET}")
 
 def show_config(config):
     clear_screen()
     print_banner()
     print_divider()
-    print_section("Current Configuration")
+    print_section("Cấu Hình Hiện Tại")
     
     if not config:
-        print(f"{Colors.RED}  No config saved yet!{Colors.RESET}")
+        print(f"{Colors.RED}  Chưa có cấu hình nào!{Colors.RESET}")
     else:
-        print(f"{Colors.WHITE}  Sender: {config.get('sender', 'N/A')}{Colors.RESET}")
-        print(f"{Colors.WHITE}  Recipients: {', '.join(config.get('recipients', []))}{Colors.RESET}")
-        print(f"{Colors.WHITE}  Loop Count: {config.get('loop_count', 'N/A')}{Colors.RESET}")
-        print(f"{Colors.WHITE}  Delay: {config.get('delay_min', 'N/A')}s - {config.get('delay_max', 'N/A')}s{Colors.RESET}")
-        print(f"{Colors.WHITE}  Subject: {config.get('subject', 'N/A')}{Colors.RESET}")
+        print(f"{Colors.WHITE}  Email gửi: {config.get('sender', 'N/A')}{Colors.RESET}")
+        print(f"{Colors.WHITE}  Người nhận: {', '.join(config.get('recipients', []))}{Colors.RESET}")
+        print(f"{Colors.WHITE}  Số lần gửi: {config.get('loop_count', 'N/A')}{Colors.RESET}")
+        print(f"{Colors.WHITE}  Thời gian chờ: {config.get('delay_min', 'N/A')}s - {config.get('delay_max', 'N/A')}s{Colors.RESET}")
+        print(f"{Colors.WHITE}  Tiêu đề: {config.get('subject', 'N/A')}{Colors.RESET}")
     
     print_divider()
-    input(f"\n{Colors.CYAN}  Press Enter to continue...{Colors.RESET}")
+    input(f"\n{Colors.CYAN}  Nhấn Enter để tiếp tục...{Colors.RESET}")
 
 def main():
     config = {}
@@ -180,7 +185,7 @@ def main():
         
         if choice == '0':
             clear_screen()
-            print(f"{Colors.CYAN}  Goodbye! 👋{Colors.RESET}\n")
+            print(f"{Colors.CYAN}  Tạm biệt! 👋{Colors.RESET}\n")
             sys.exit(0)
         elif choice == '1':
             config = get_config()
@@ -191,10 +196,10 @@ def main():
             if config:
                 run_send(config)
             else:
-                print(f"{Colors.RED}  No config! Please use option 1 first.{Colors.RESET}")
+                print(f"{Colors.RED}  Chưa có cấu hình! Vui lòng chọn 1 trước.{Colors.RESET}")
                 time.sleep(2)
         else:
-            print(f"{Colors.RED}  Invalid option!{Colors.RESET}")
+            print(f"{Colors.RED}  Lựa chọn không hợp lệ!{Colors.RESET}")
             time.sleep(1)
 
 if __name__ == "__main__":
