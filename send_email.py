@@ -11,7 +11,7 @@ def send_email():
     subject = f"{EMAIL_SUBJECT} #{random_number}"
     
     msg = MIMEMultipart()
-    msg['From'] = SENDER_EMAIL
+    msg['From'] = SENDER_EMAILS
     msg['To'] = ", ".join(RECIPIENTS)
     msg['Subject'] = subject
     
