@@ -93,6 +93,7 @@ def main_menu():
 {Colors.GREEN}  1. ➤ Gửi Email Mới        {Colors.WHITE}(Nhập cấu hình và gửi email){Colors.RESET}
 {Colors.CYAN}  2. ◉ Xem Cấu Hình         {Colors.WHITE}(Xem cấu hình đã lưu){Colors.RESET}
 {Colors.YELLOW}  3. ⚙ Gửi Nhanh            {Colors.WHITE}(Gửi lại với cấu hình cũ){Colors.RESET}
+{Colors.MAGENTA}  4. ✎ Sửa Cấu Hình         {Colors.WHITE}(Sửa một phần cấu hình){Colors.RESET}
     """)
     print_divider()
     
@@ -177,6 +178,59 @@ def show_config(config):
     print_divider()
     input(f"\n{Colors.CYAN}  Nhấn Enter để tiếp tục...{Colors.RESET}")
 
+def edit_config(config):
+    clear_screen()
+    print_banner()
+    print_divider()
+    print_section("Sửa Cấu Hình")
+    
+    if not config:
+        print(f"{Colors.RED}  Chưa có cấu hình nào! Vui lòng chọn 1 trước.{Colors.RESET}")
+        input(f"\n{Colors.CYAN}  Nhấn Enter để tiếp tục...{Colors.RESET}")
+        return config
+    
+    print(f"""
+{Colors.WHITE}  1. Người nhận      : {', '.join(config.get('recipients', []))}{Colors.RESET}
+{Colors.WHITE}  2. Số lần gửi      : {config.get('loop_count', 'N/A')}{Colors.RESET}
+{Colors.WHITE}  3. Thời gian chờ   : {config.get('delay_min', 'N/A')}s - {config.get('delay_max', 'N/A')}s{Colors.RESET}
+{Colors.WHITE}  4. Tiêu đề         : {config.get('subject', 'N/A')}{Colors.RESET}
+{Colors.WHITE}  5. Nội dung email{Colors.RESET}
+{Colors.RED}  0. Quay lại{Colors.RESET}
+    """)
+    print_divider()
+    
+    choice = input(f"{Colors.MAGENTA}  Chọn mục cần sửa: {Colors.RESET}")
+    
+    if choice == '1':
+        print_section("Sửa Người Nhận")
+        recipients_str = input_field("Danh sách email nhận (cách nhau bằng dấu phẩy)")
+        config['recipients'] = [r.strip() for r in recipients_str.split(',')]
+        print(f"{Colors.GREEN}  ✓ Đã cập nhật người nhận!{Colors.RESET}")
+    elif choice == '2':
+        print_section("Sửa Số Lần Gửi")
+        config['loop_count'] = int(input_field("Số lần gửi lặp lại", str(config['loop_count'])))
+        print(f"{Colors.GREEN}  ✓ Đã cập nhật số lần gửi!{Colors.RESET}")
+    elif choice == '3':
+        print_section("Sửa Thời Gian Chờ")
+        config['delay_min'] = int(input_field("Thời gian chờ tối thiểu (giây)", str(config['delay_min'])))
+        config['delay_max'] = int(input_field("Thời gian chờ tối đa (giây)", str(config['delay_max'])))
+        print(f"{Colors.GREEN}  ✓ Đã cập nhật thời gian chờ!{Colors.RESET}")
+    elif choice == '4':
+        print_section("Sửa Tiêu Đề")
+        config['subject'] = input_field("Tiêu đề email", config['subject'])
+        print(f"{Colors.GREEN}  ✓ Đã cập nhật tiêu đề!{Colors.RESET}")
+    elif choice == '5':
+        print_section("Sửa Nội Dung Email")
+        config['content'] = input_multiline("Nội dung email mới")
+        print(f"{Colors.GREEN}  ✓ Đã cập nhật nội dung!{Colors.RESET}")
+    elif choice == '0':
+        return config
+    else:
+        print(f"{Colors.RED}  Lựa chọn không hợp lệ!{Colors.RESET}")
+    
+    time.sleep(1)
+    return config
+
 def main():
     config = {}
     
@@ -198,6 +252,8 @@ def main():
             else:
                 print(f"{Colors.RED}  Chưa có cấu hình! Vui lòng chọn 1 trước.{Colors.RESET}")
                 time.sleep(2)
+        elif choice == '4':
+            config = edit_config(config)
         else:
             print(f"{Colors.RED}  Lựa chọn không hợp lệ!{Colors.RESET}")
             time.sleep(1)
