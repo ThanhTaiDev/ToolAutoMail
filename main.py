@@ -64,7 +64,7 @@ def input_multiline(label):
         lines.append(line)
     return '\n'.join(lines)
 
-def send_email(sender, password, recipients, subject_template, content):
+def send_email(sender, password, recipients, subject_template, content, smtp_server, smtp_port, use_ssl=False):
     random_number = random.randint(1000000000000000, 9999999999999999)
     subject = f"{subject_template} #{random_number}"
     
@@ -74,8 +74,12 @@ def send_email(sender, password, recipients, subject_template, content):
     msg['Subject'] = subject
     msg.attach(MIMEText(content, 'plain', 'utf-8'))
     
-    server = smtplib.SMTP('smtp.gmail.com', 587)
-    server.starttls()
+    if use_ssl:
+        server = smtplib.SMTP_SSL(smtp_server, smtp_port)
+    else:
+        server = smtplib.SMTP(smtp_server, smtp_port)
+        server.starttls()
+    
     server.login(sender, password)
     server.sendmail(sender, recipients, msg.as_string())
     server.quit()
@@ -106,9 +110,16 @@ def get_config():
     
     config = {}
     
+    print_section("Cấu Hình SMTP Server")
+    print(f"{Colors.WHITE}  Gợi ý: Gmail (smtp.gmail.com:587), Outlook (smtp.office365.com:587){Colors.RESET}")
+    print(f"{Colors.WHITE}         Custom domain thường dùng SSL port 465{Colors.RESET}")
+    config['smtp_server'] = input_field("SMTP Server", "smtp.gmail.com")
+    config['smtp_port'] = int(input_field("SMTP Port", "587"))
+    config['use_ssl'] = input_field("Dùng SSL? (y/n)", "n").lower() == 'y'
+    
     print_section("Cấu Hình Email Gửi")
     config['sender'] = input_field("Email của bạn")
-    config['password'] = input_field("App Password (16 ký tự)")
+    config['password'] = input_field("Password/App Password")
     
     print_section("Người Nhận (cách nhau bằng dấu phẩy)")
     recipients_str = input_field("Danh sách email nhận")
@@ -142,7 +153,10 @@ def run_send(config):
                 config['password'],
                 config['recipients'],
                 config['subject'],
-                config['content']
+                config['content'],
+                config['smtp_server'],
+                config['smtp_port'],
+                config.get('use_ssl', False)
             )
             success += 1
             print(f"{Colors.GREEN}  ✓ [{i}/{config['loop_count']}] Gửi thành công!{Colors.RESET}")
@@ -169,6 +183,7 @@ def show_config(config):
     if not config:
         print(f"{Colors.RED}  Chưa có cấu hình nào!{Colors.RESET}")
     else:
+        print(f"{Colors.WHITE}  SMTP Server: {config.get('smtp_server', 'N/A')}:{config.get('smtp_port', 'N/A')} {'(SSL)' if config.get('use_ssl') else '(TLS)'}{Colors.RESET}")
         print(f"{Colors.WHITE}  Email gửi: {config.get('sender', 'N/A')}{Colors.RESET}")
         print(f"{Colors.WHITE}  Người nhận: {', '.join(config.get('recipients', []))}{Colors.RESET}")
         print(f"{Colors.WHITE}  Số lần gửi: {config.get('loop_count', 'N/A')}{Colors.RESET}")
