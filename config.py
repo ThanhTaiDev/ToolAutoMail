@@ -2,21 +2,27 @@
 
 # Danh sách email nhận (thêm/xóa tùy ý)
 RECIPIENTS = [
-    "vovan.thanhtai7777@gmail.com",
-    "vovan.thanhtai8888@gmail.com",
-    "vovan.thanhtai6666@gmail.com",
+   "ip@support.facebook.com",
+    "ip-support@support.instagram.com",
+    "intellectual_property@support.facebook.com",
+    "copyright@support.facebook.com",
+    "copyright@support.instagram.com",
+    "impressum@support.facebook.com",
 ]
 
 # Thông tin đăng nhập Gmail của bạn
-SENDER_EMAIL = "enforcement.tissot@gmail.com"
-APP_PASSWORD = "ztxr rdbf lytz uumz"
+SENDER_EMAIL = "unicornpalclub@gmail.com"
+APP_PASSWORD = "bxrp glcp adan pxpq"
 
 # Số lần gửi email lặp lại
-LOOP_COUNT = 5
+LOOP_COUNT = 200
 
 # Thời gian chờ giữa mỗi lần gửi (giây) - random trong khoảng
 DELAY_MIN = 5
-DELAY_MAX = 10
+DELAY_MAX = 15
+
+# Tiêu đề email (phần số sẽ tự động random)
+EMAIL_SUBJECT = "Intellectual Property Appeal Contact Form"
 
 # ==================== NỘI DUNG EMAIL ====================
 
@@ -30,11 +36,11 @@ To: Meta / Facebook – Intellectual Property & Legal Enforcement Team
 
 Dear Meta / Facebook Intellectual Property Team,
 
-My name is Tran Thai Phuong, Attorney-at-Law. I hereby submit this appeal in my professional legal capacity as duly authorized counsel, acting pursuant to valid, lawful, and continuing Powers of Attorney granted by the clients identified herein.
+My name is Vo Van Thanh Tai, Attorney-at-Law. I hereby submit this appeal in my professional legal capacity as duly authorized counsel, acting pursuant to valid, lawful, and continuing Powers of Attorney granted by the clients identified herein.
 
-Each client has expressly empowered me to represent them before Meta / Facebook in all matters relating to copyright, trademark, name, identity, and intellectual property enforcement, including the submission of formal appeals, legal objections, counter‑notices, and demands for restoration of accounts, Pages, Groups, content, and access rights.
+Client has expressly empowered me to represent them before Meta / Facebook in all matters relating to copyright, trademark, name, identity, and intellectual property enforcement, including the submission of formal appeals, legal objections, counter‑notices, and demands for restoration of accounts, Pages, Groups, content, and access rights.
 
-This submission constitutes a FORMAL INTELLECTUAL PROPERTY APPEAL ARISING FROM SYSTEMIC, DELIBERATE, AND BAD‑FAITH ABUSE OF META'S COPYRIGHT AND TRADEMARK ENFORCEMENT SYSTEMS, and does not arise from any legitimate or substantiated allegation of intellectual property infringement.
+This submission constitutes a FORMAL INTELLECTUAL PROPERTY APPEAL ARISING FROM SYSTEMIC, DELIBERATE, AND BAD‑FAITH ABUSE OF META’S COPYRIGHT AND TRADEMARK ENFORCEMENT SYSTEMS, and does not arise from any legitimate or substantiated allegation of intellectual property infringement.
 
 I. LEGAL CHARACTERIZATION OF THIS APPEAL
 
@@ -48,89 +54,30 @@ Automated, cascading, or derivative restrictions imposed without individualized 
 
 Clear indicators of material misrepresentation, bad‑faith reporting, and procedural abuse, intended to disrupt lawful personal identity, business activity, and community operation.
 
-Such conduct constitutes abuse of intellectual property rights, copyright misrepresentation, and the unlawful weaponization of Meta's enforcement mechanisms, contrary to fundamental principles of due process and proportional enforcement.
+Such conduct constitutes abuse of intellectual property rights, copyright misrepresentation, and the unlawful weaponization of Meta’s enforcement mechanisms, contrary to fundamental principles of due process and proportional enforcement.
 
 II. CLIENT IDENTIFICATION, FACEBOOK LINKS, REPORT NUMBERS & LEGAL BASIS FOR RESTORATION
-Client Name: Magicdecor
 
-Asset Type: Facebook Page (Business Identity & Lawful IP Usage)
-
-Facebook Page Link:
-https://www.facebook.com/103008365575340
-
-Report Number:
-Copyright (DMCA) – 1639976590049028
-
-Legal Analysis & Mandatory Restoration Requirement:
-The Magicdecor Page was restricted pursuant to a copyright report that fails to identify any copyrighted work allegedly infringed, as expressly required under the DMCA. The Page does not reproduce, distribute, adapt, display, or derive from any protected material.
-
-Accordingly, the report is legally defective ab initio and constitutes copyright misrepresentation under 17 U.S.C. §512(f). The resulting enforcement action is unlawful and requires full, unconditional, and immediate restoration of the Page, all content, and all functional privileges.
-
-Client Name: Huong Trinh
-
-Asset Type: Facebook Profile (Lawful Personal Identity)
-
-Facebook Profile Link:
-https://www.facebook.com/1073983177
-
-Report Number:
-Copyright (DMCA) – 1639976590049028
-
-Legal Analysis & Mandatory Restoration Requirement:
-This personal profile contains no infringing content whatsoever. The restriction appears to be the result of automated or derivative enforcement propagation arising from the same abusive DMCA report applied to another asset.
-
-Such action constitutes procedural abuse, denial of due process, and unlawful interference with lawful identity usage. Immediate and full restoration of the profile and all associated content is legally required.
-
-Client Name: Nguyen Nhu Ngoc
+Client Name: Uyên Uyên
 
 Asset Type: Facebook Profile (Personal Name & Identity Rights)
 
 Facebook Profile Link:
-https://www.facebook.com/100035565829969
+https://www.facebook.com/100026678942044
 
 Report Number:
-Trademark (ROUGE 540 – Maison Francis Kurkdjian) – 1036276434612123
+Trademark (Charles & Keith International Pte. Ltd.) – 988155476691670 – 4679222755636950
 
 Legal Analysis & Mandatory Restoration Requirement:
-This profile does not use, display, promote, sell, reference, or otherwise exploit the ROUGE 540 trademark. There is no commercial use, no branding activity, and no likelihood of consumer confusion.
+This profile does not use, display, promote, sell, reference, or otherwise exploit the Charles & Keith International Pte. Ltd. trademark. There is no commercial use, no branding activity, and no likelihood of consumer confusion.
 
 The trademark complaint is therefore legally unfounded, evidentially unsupported, and abusive. All restrictions must be lifted and full restoration implemented without delay.
-
-Client Name: Thu Trang Le
-
-Asset Type: Facebook Profile (Personal Name & Identity Rights)
-
-Facebook Profile Link:
-https://www.facebook.com/100008199014281
-
-Report Number:
-Trademark (DIOR – Parfums Christian Dior) – 659588493664221
-
-Legal Analysis & Mandatory Restoration Requirement:
-No DIOR trademark, logo, trade dress, branding, or confusing reference appears on this account. In the absence of trademark use or consumer confusion, the enforcement action is legally void and constitutes abusive trademark enforcement.
-
-Immediate restoration of the account and all content is required.
-
-Client Name: C.N.K, P.E.D.R.O LIQUIDATION ASSOCIATION ORDER SING – AUTHENTIC
-
-Asset Type: Facebook Group (Community & Collective Identity)
-
-Facebook Group Link:
-https://web.facebook.com/groups/680853702668325
-
-Report Number:
-Trademark (CHARLES & KEITH) – 788551206733461
-
-Legal Analysis & Mandatory Restoration Requirement:
-The Group does not impersonate CHARLES & KEITH, does not present itself as an official brand channel, and does not distribute protected brand assets. Any references are purely descriptive and nominative, which is lawful under trademark doctrine.
-
-The report is legally deficient and constitutes abusive intellectual property enforcement. Full restoration of the Group is legally mandated.
 
 III. LEGAL FINDINGS – SYSTEMATIC AND DELIBERATE BAD‑FAITH ABUSE
 
 The above enforcement actions demonstrate a systematic pattern of bad‑faith abuse, including copyright misrepresentation, trademark claims without use in commerce, and unlawful interference with lawful personal, business, and community identity.
 
-Such conduct constitutes bad‑faith exploitation of Meta's intellectual property enforcement systems and undermines fundamental due process protections owed to lawful users.
+Such conduct constitutes bad‑faith exploitation of Meta’s intellectual property enforcement systems and undermines fundamental due process protections owed to lawful users.
 
 IV. FORMAL LEGAL DEMAND FOR CORRECTIVE RELIEF
 
@@ -154,13 +101,13 @@ Supporting documentation, including executed Powers of Attorney, will be produce
 
 VI. FINAL LEGAL NOTICE
 
-This submission constitutes a formal legal notice and intellectual property appeal arising from bad‑faith abuse of enforcement mechanisms. Meta's intellectual property systems must not be weaponized to suppress lawful identity, expression, community activity, or legitimate business operations.
+This submission constitutes a formal legal notice and intellectual property appeal arising from bad‑faith abuse of enforcement mechanisms. Meta’s intellectual property systems must not be weaponized to suppress lawful identity, expression, community activity, or legitimate business operations.
 
 Prompt legal correction, strict due‑process compliance, and full restoration are formally demanded and reasonably expected.
 
 Respectfully submitted,
 
-Tran Thai Phuong
+Vo Van Thanh Tai
 Attorney‑at‑Law
 Authorized Legal Representative
 """

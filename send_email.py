@@ -3,13 +3,17 @@ import time
 import random
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from config import RECIPIENTS, SENDER_EMAIL, APP_PASSWORD, LOOP_COUNT, DELAY_MIN, DELAY_MAX, EMAIL_CONTENT
+from config import RECIPIENTS, SENDER_EMAIL, APP_PASSWORD, LOOP_COUNT, DELAY_MIN, DELAY_MAX, EMAIL_CONTENT, EMAIL_SUBJECT
 
 def send_email():
+    # Tạo số random 16 chữ số cho tiêu đề
+    random_number = random.randint(1000000000000000, 9999999999999999)
+    subject = f"{EMAIL_SUBJECT} #{random_number}"
+    
     msg = MIMEMultipart()
     msg['From'] = SENDER_EMAIL
     msg['To'] = ", ".join(RECIPIENTS)
-    msg['Subject'] = ""
+    msg['Subject'] = subject
     
     msg.attach(MIMEText(EMAIL_CONTENT, 'plain', 'utf-8'))
     
@@ -20,7 +24,8 @@ def send_email():
         server.sendmail(SENDER_EMAIL, RECIPIENTS, msg.as_string())
         server.quit()
         
-        print(f"✓ Đã gửi email thành công đến {len(RECIPIENTS)} người!")
+        print(f"✓ Đã gửi email thành công!")
+        print(f"  Tiêu đề: {subject}")
         for r in RECIPIENTS:
             print(f"  - {r}")
             
